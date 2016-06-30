@@ -22,14 +22,14 @@ class JSON_API_Response {
   function get_json($data, $status = 'ok') {
     global $json_api;
     // Include a status value with the response
-    if (is_array($data)) {
-      $data = array_merge(array('status' => $status), $data);
-    } else if (is_object($data)) {
-      $data = get_object_vars($data);
-      $data = array_merge(array('status' => $status), $data);
-    }
+    // if (is_array($data)) {
+    //   $data = array_merge(array('status' => $status), $data);
+    // } else if (is_object($data)) {
+    //   $data = get_object_vars($data);
+    //   $data = array_merge(array('status' => $status), $data);
+    // }
     
-    $data = apply_filters('json_api_encode', $data);
+    // $data = apply_filters('json_api_encode', $data);
     
     if (function_exists('json_encode')) {
       // Use the built-in json_encode function if it's available
