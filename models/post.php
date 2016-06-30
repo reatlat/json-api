@@ -20,7 +20,7 @@ class JSON_API_Post {
   // var $tags;            // Array of objects
   // var $author;          // Object
   // var $comments;        // Array of objects
-  var $attachments;     // Array of objects
+  // var $attachments;     // Array of objects
   // var $comment_count;   // Integer
   // var $comment_status;  // String ("open" or "closed")
   var $thumbnail;       // String
@@ -144,7 +144,7 @@ class JSON_API_Post {
     // $this->set_tags_value();
     // $this->set_author_value($wp_post->post_author);
     // $this->set_comments_value();
-    $this->set_attachments_value();
+    // $this->set_attachments_value();
     // $this->set_value('comment_count', (int) $wp_post->comment_count);
     // $this->set_value('comment_status', $wp_post->comment_status);
     $this->set_thumbnail_value();
