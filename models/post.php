@@ -7,7 +7,7 @@ class JSON_API_Post {
   
   var $id;              // Integer
   // var $type;            // String
-  // var $slug;            // String
+  var $slug;            // String
   var $url;             // String
   // var $status;          // String ("draft", "published", or "pending")
   var $title;           // String
@@ -16,11 +16,11 @@ class JSON_API_Post {
   // var $excerpt;         // String
   var $date;            // String (modified by date_format query var)
   var $modified;        // String (modified by date_format query var)
-  // var $categories;      // Array of objects
-  // var $tags;            // Array of objects
-  // var $author;          // Object
+  var $categories;      // Array of objects
+  var $tags;            // Array of objects
+  var $author;          // Object
   // var $comments;        // Array of objects
-  // var $attachments;     // Array of objects
+  var $attachments;     // Array of objects
   // var $comment_count;   // Integer
   // var $comment_status;  // String ("open" or "closed")
   var $thumbnail;       // String
@@ -74,35 +74,35 @@ class JSON_API_Post {
       $wp_values['post_content'] = $values['content'];
     }
     
-    // if (!empty($values['author'])) {
-    //   $author = $json_api->introspector->get_author_by_login($values['author']);
-    //   $wp_values['post_author'] = $author->id;
-    // }
+    if (!empty($values['author'])) {
+      $author = $json_api->introspector->get_author_by_login($values['author']);
+      $wp_values['post_author'] = $author->id;
+    }
     
-    // if (isset($values['categories'])) {
-    //   $categories = explode(',', $values['categories']);
-    //   foreach ($categories as $category_slug) {
-    //     $category_slug = trim($category_slug);
-    //     $category = $json_api->introspector->get_category_by_slug($category_slug);
-    //     if (empty($wp_values['post_category'])) {
-    //       $wp_values['post_category'] = array($category->id);
-    //     } else {
-    //       array_push($wp_values['post_category'], $category->id);
-    //     }
-    //   }
-    // }
+    if (isset($values['categories'])) {
+      $categories = explode(',', $values['categories']);
+      foreach ($categories as $category_slug) {
+        $category_slug = trim($category_slug);
+        $category = $json_api->introspector->get_category_by_slug($category_slug);
+        if (empty($wp_values['post_category'])) {
+          $wp_values['post_category'] = array($category->id);
+        } else {
+          array_push($wp_values['post_category'], $category->id);
+        }
+      }
+    }
     
-    // if (isset($values['tags'])) {
-    //   $tags = explode(',', $values['tags']);
-    //   foreach ($tags as $tag_slug) {
-    //     $tag_slug = trim($tag_slug);
-    //     if (empty($wp_values['tags_input'])) {
-    //       $wp_values['tags_input'] = array($tag_slug);
-    //     } else {
-    //       array_push($wp_values['tags_input'], $tag_slug);
-    //     }
-    //   }
-    // }
+    if (isset($values['tags'])) {
+      $tags = explode(',', $values['tags']);
+      foreach ($tags as $tag_slug) {
+        $tag_slug = trim($tag_slug);
+        if (empty($wp_values['tags_input'])) {
+          $wp_values['tags_input'] = array($tag_slug);
+        } else {
+          array_push($wp_values['tags_input'], $tag_slug);
+        }
+      }
+    }
     
     if (isset($wp_values['ID'])) {
       $this->id = wp_update_post($wp_values);
@@ -131,7 +131,7 @@ class JSON_API_Post {
     $this->id = (int) $wp_post->ID;
     setup_postdata($wp_post);
     // $this->set_value('type', $wp_post->post_type);
-    // $this->set_value('slug', $wp_post->post_name);
+    $this->set_value('slug', $wp_post->post_name);
     $this->set_value('url', get_permalink($this->id) );
     // $this->set_value('status', $wp_post->post_status);
     $this->set_value('title', strip_tags(get_the_title($this->id)));
@@ -140,11 +140,11 @@ class JSON_API_Post {
     // $this->set_value('excerpt', apply_filters('the_excerpt', get_the_excerpt()));
     $this->set_value('date', get_the_time($date_format));
     $this->set_value('modified', date($date_format, strtotime($wp_post->post_modified)));
-    // $this->set_categories_value();
-    // $this->set_tags_value();
-    // $this->set_author_value($wp_post->post_author);
+    $this->set_categories_value();
+    $this->set_tags_value();
+    $this->set_author_value($wp_post->post_author);
     // $this->set_comments_value();
-    // $this->set_attachments_value();
+    $this->set_attachments_value();
     // $this->set_value('comment_count', (int) $wp_post->comment_count);
     // $this->set_value('comment_status', $wp_post->comment_status);
     $this->set_thumbnail_value();

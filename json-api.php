@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: JSON API [Mammoth Hunters edition]
+Plugin Name: MH - JSON API for blog in MammothHunters App
 Plugin URI: https://github.com/reatlat/json-api
 Description: A RESTful API for WordPress [Mammuth Hunters edition]. Forked from https://github.com/dphiffer/wp-json-api
-Version: 2.0.2
+Version: 2.0.5
 Author: Alex Zappa a.k.a. re[at]lat
 Author URI: http://www.reatlat.net/
 */
