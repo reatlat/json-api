@@ -24,6 +24,7 @@ class JSON_API_Post {
   // var $comment_count;   // Integer
   // var $comment_status;  // String ("open" or "closed")
   var $thumbnail;       // String
+  var $thumbnail_secondary;       // String
   // var $custom_fields;   // Object (included by using custom_fields query var)
   
   function JSON_API_Post($wp_post = null) {
@@ -148,6 +149,7 @@ class JSON_API_Post {
     // $this->set_value('comment_count', (int) $wp_post->comment_count);
     // $this->set_value('comment_status', $wp_post->comment_status);
     $this->set_thumbnail_value();
+    $this->set_thumbnail_secondary_value();
     // $this->set_custom_fields_value();
     // $this->set_custom_taxonomies($wp_post->post_type);
     do_action("json_api_import_wp_post", $this, $wp_post);
@@ -252,6 +254,16 @@ class JSON_API_Post {
     $image = $attachment->images[$thumbnail_size];
     $this->thumbnail = $attachment->url;
     // $this->thumbnail_images = $attachment->images;
+  }
+
+   function set_thumbnail_secondary_value() {
+    global $json_api;
+
+    $image_id = get_post_meta($this->id, 'post_secondary-image_thumbnail_id', true);
+
+    $attachment = $json_api->introspector->get_attachment($image_id);
+    $image = $attachment->images[$thumbnail_size];
+    $this->thumbnail_secondary = $attachment->url;
   }
   
   function set_custom_fields_value() {
