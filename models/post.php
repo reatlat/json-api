@@ -252,7 +252,7 @@ class JSON_API_Post {
     // $this->thumbnail_size = $thumbnail_size;
     $attachment = $json_api->introspector->get_attachment($attachment_id);
     $image = $attachment->images[$thumbnail_size];
-    $this->thumbnail = $attachment->url;
+    $this->thumbnail = wp_get_attachment_url($attachment_id); //$attachment->url;
     // $this->thumbnail_images = $attachment->images;
   }
 
@@ -263,7 +263,7 @@ class JSON_API_Post {
 
     $attachment = $json_api->introspector->get_attachment($image_id);
     $image = $attachment->images[$thumbnail_size];
-    $this->thumbnail_secondary = $attachment->url;
+    $this->thumbnail_secondary = wp_get_attachment_url($image_id); //$attachment->url;
   }
   
   function set_custom_fields_value() {
