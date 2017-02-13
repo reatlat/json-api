@@ -46,11 +46,12 @@ class JSON_API_Core_Controller {
     global $json_api;
     $url = parse_url($_SERVER['REQUEST_URI']);
     $defaults = array(
-      'ignore_sticky_posts' => true
+      'ignore_sticky_posts' => true,
+      'post_status' => 'publish'
     );
     $query = wp_parse_args($url['query']);
     unset($query['json']);
-    unset($query['post_status']);
+    // unset($query['post_status']);
     $query = array_merge($defaults, $query);
     $posts = $json_api->introspector->get_posts($query);
     $result = $this->posts_result($posts);

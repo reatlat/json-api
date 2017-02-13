@@ -7,23 +7,23 @@ class JSON_API_Post {
   
   var $id;              // Integer
   // var $type;            // String
-  var $slug;            // String
-  var $url;             // String
+  // var $slug;            // String
+  // var $url;             // String
   // var $status;          // String ("draft", "published", or "pending")
   var $title;           // String
   // var $title_plain;     // String
-  var $content;         // String (modified by read_more query var)
+  // var $content;         // String (modified by read_more query var)
   // var $excerpt;         // String
   var $date;            // String (modified by date_format query var)
-  var $modified;        // String (modified by date_format query var)
+  // var $modified;        // String (modified by date_format query var)
   var $categories;      // Array of objects
-  var $tags;            // Array of objects
-  var $author;          // Object
+  // var $tags;            // Array of objects
+  // var $author;          // Object
   // var $comments;        // Array of objects
-  var $attachments;     // Array of objects
+  // var $attachments;     // Array of objects
   // var $comment_count;   // Integer
   // var $comment_status;  // String ("open" or "closed")
-  var $thumbnail;       // String
+  // var $thumbnail;       // String
   var $thumbnail_secondary;       // String
   // var $custom_fields;   // Object (included by using custom_fields query var)
   
@@ -132,23 +132,23 @@ class JSON_API_Post {
     $this->id = (int) $wp_post->ID;
     setup_postdata($wp_post);
     // $this->set_value('type', $wp_post->post_type);
-    $this->set_value('slug', $wp_post->post_name);
-    $this->set_value('url', get_permalink($this->id) );
+    // $this->set_value('slug', $wp_post->post_name);
+    // $this->set_value('url', get_permalink($this->id) );
     // $this->set_value('status', $wp_post->post_status);
     $this->set_value('title', strip_tags(get_the_title($this->id)));
     // $this->set_value('title_plain', strip_tags(@$this->title));
-    $this->set_value('content', str_replace("\"", "&quot;", iconv('utf-8', 'us-ascii//TRANSLIT',strip_tags(get_the_excerpt())))); // set_content_value();
+    // $this->set_value('content', str_replace("\"", "&quot;", iconv('utf-8', 'us-ascii//TRANSLIT',strip_tags(get_the_excerpt())))); // set_content_value();
     // $this->set_value('excerpt', apply_filters('the_excerpt', get_the_excerpt()));
     $this->set_value('date', get_the_time($date_format));
-    $this->set_value('modified', date($date_format, strtotime($wp_post->post_modified)));
+    // $this->set_value('modified', date($date_format, strtotime($wp_post->post_modified)));
     $this->set_categories_value();
-    $this->set_tags_value();
-    $this->set_author_value($wp_post->post_author);
+    // $this->set_tags_value();
+    // $this->set_author_value($wp_post->post_author);
     // $this->set_comments_value();
-    $this->set_attachments_value();
+    // $this->set_attachments_value();
     // $this->set_value('comment_count', (int) $wp_post->comment_count);
     // $this->set_value('comment_status', $wp_post->comment_status);
-    $this->set_thumbnail_value();
+    // $this->set_thumbnail_value();
     $this->set_thumbnail_secondary_value();
     // $this->set_custom_fields_value();
     // $this->set_custom_taxonomies($wp_post->post_type);
